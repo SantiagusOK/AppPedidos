@@ -1,11 +1,7 @@
 import 'package:ejemplos_2do_soft_9010/home_page.dart';
 import 'package:ejemplos_2do_soft_9010/layout_constraints.dart';
 import 'package:ejemplos_2do_soft_9010/main.dart';
-import 'package:ejemplos_2do_soft_9010/memory_game/memory_game_cubit.dart';
-import 'package:ejemplos_2do_soft_9010/memory_game/memory_game_page.dart';
 import 'package:ejemplos_2do_soft_9010/pedidos/presentacion/routes.dart';
-import 'package:ejemplos_2do_soft_9010/tic_tac_toe/tic_tac_toe.dart';
-import 'package:ejemplos_2do_soft_9010/tic_tac_toe/tic_tac_toe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,14 +17,14 @@ GoRouter examples2ndRouter =
         return const MenuPage();
       },
       routes: [
-        GoRoute(
+        /* GoRoute(
           name: Pages.memoryGame.name,
           path: 'memory',
           builder: (context, state) {
             return BlocProvider<MemoryGameCubit>.value(
                 value: memoryGameCubit, child: const MemoryGamePage());
           },
-        ),
+        ),*/
         GoRoute(
           name: Pages.ejLayoutBuilder.name,
           path: 'ejLayoutBuilder',
@@ -36,7 +32,7 @@ GoRouter examples2ndRouter =
             return const LayoutConstraintsExamplePage();
           },
         ),
-        GoRoute(
+        /*GoRoute(
           name: Pages.tictactoe.name,
           path: 'tictactoe',
           builder: (context, state) {
@@ -46,7 +42,7 @@ GoRouter examples2ndRouter =
             return BlocProvider<TicTacToeGame>.value(
                 value: titactoeGameCubit, child: const TicTacToePage());
           },
-        ),
+        ),*/
         GoRoute(
           name: Pages.pedidos.name,
           path: 'pedidos',
