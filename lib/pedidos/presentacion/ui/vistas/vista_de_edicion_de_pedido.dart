@@ -13,8 +13,9 @@ class VistaDeEdicionDePedido extends StatefulWidget {
 }
 
 class _VistaDeEdicionDePedidoState extends State<VistaDeEdicionDePedido> {
-  final int _total = 0;
+  double _total = 0;
   late BlocEdicionDePedido blocEdicionDePedido;
+  ItemDePedido? itemDePedido;
   int indiceDeItemDePedidoSeleccionado = 0;
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,10 @@ class _VistaDeEdicionDePedidoState extends State<VistaDeEdicionDePedido> {
             );
           });
     }
+
+    /*void sumarTotal(int precio) {
+      _total = _total + itemDePedido!.totalItem;
+    }*/
 
     Future<void> crearItemDePedido() async {
       ItemDePedido? itemDePedidoONada = await mostrarDialogoDeItemDePedido(
@@ -58,65 +63,72 @@ class _VistaDeEdicionDePedidoState extends State<VistaDeEdicionDePedido> {
       body: BlocConsumer<BlocEdicionDePedido, EstadoDeEdicionDePedido>(
           builder: ((context, state) {
         state as EEPCreandoOEditandoPedido;
-        return Column(
-          children: [
-            const Text("Comidas: "),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    selected: state.itemsDePedido[index] ==
-                        context
-                            .watch<BlocEdicionDePedido>()
-                            .itemDePedidoSeleccionado,
-                    title: Text(state.itemsDePedido[index].toString()),
-                    onTap: () {
-                      setState(() {
-                        BlocProvider.of<BlocEdicionDePedido>(context)
-                            .seleccionarItemDePedido(
-                                state.itemsDePedido[index]);
-                      });
-                    },
-                  );
-                },
-                itemCount: state.itemsDePedido.length,
+        return Center(
+          child: Column(
+            children: [
+              const Text("Comidas: "),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      selected: state.itemsDePedido[index] ==
+                          context
+                              .watch<BlocEdicionDePedido>()
+                              .itemDePedidoSeleccionado,
+                      title: Text(state.itemsDePedido[index].toString()),
+                      onTap: () {
+                        setState(() {
+                          BlocProvider.of<BlocEdicionDePedido>(context)
+                              .seleccionarItemDePedido(
+                                  state.itemsDePedido[index]);
+                        });
+                      },
+                    );
+                  },
+                  itemCount: state.itemsDePedido.length,
+                ),
               ),
-            ),
-            Text('Total: $_total'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: blocEdicionDePedido
-                      .comenzarEditarItemDePedidoSeleccionado,
-                  child: const SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: Center(child: Text('Editar  item')))),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: blocEdicionDePedido.comenzandoACrearItemDePedido,
-                  child: const SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: Center(child: Text('Agregar  item')))),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: () => {},
-                  child: const SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: Center(child: Text('Regresar')))),
-            ),
-            const SizedBox(
-              height: 50,
-            )
-          ],
+              Text(
+                  'Total: \$${context.watch<BlocEdicionDePedido>().pedido.obtenerTotal()}'),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: ElevatedButton(
+                    onPressed: blocEdicionDePedido
+                        .comenzarEditarItemDePedidoSeleccionado,
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(500, 50)),
+                    child: const SizedBox(
+                        width: double.infinity,
+                        child: Center(child: Text('Editar  item')))),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: ElevatedButton(
+                    onPressed: blocEdicionDePedido.comenzandoACrearItemDePedido,
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(500, 50)),
+                    child: const SizedBox(
+                        width: double.infinity,
+                        child: Center(child: Text('Agregar  item')))),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: ElevatedButton(
+                    onPressed: () => {},
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(500, 50)),
+                    child: const SizedBox(
+                        width: double.infinity,
+                        child: Center(child: Text('Regresar')))),
+              ),
+              const SizedBox(
+                height: 50,
+              )
+            ],
+          ),
         );
       }), listener: (context, state) {
         switch (state.nombre) {
@@ -128,6 +140,12 @@ class _VistaDeEdicionDePedidoState extends State<VistaDeEdicionDePedido> {
             state as EEPCreandoOEditandoPedido;
             crearItemDePedido();
             break;
+          case NombreDeEstadoDeEdicionDePedido.falla:
+            state as EEPMostrandoFalla;
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.red,
+              content: Text((state).mensajeDeError),
+            ));
           default:
         }
       }),

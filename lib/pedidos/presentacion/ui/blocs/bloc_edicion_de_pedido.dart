@@ -48,6 +48,10 @@ class BlocEdicionDePedido extends Cubit<EstadoDeEdicionDePedido> {
             itemsDePedido: pedido.items));
 
   seleccionarItemDePedido(ItemDePedido nuevoItemDePedidoSeleccionado) {
+    if (nuevoItemDePedidoSeleccionado == null) {
+      emit(const EEPMostrandoFalla(
+          mensajeDeError: 'Es necesario que selecciones el pedido a editar'));
+    }
     itemDePedidoSeleccionado = nuevoItemDePedidoSeleccionado;
 
     EEPCreandoOEditandoPedido(

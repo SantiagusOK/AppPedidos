@@ -1,4 +1,3 @@
-import 'package:ejemplos_2do_soft_9010/main.dart';
 import 'package:ejemplos_2do_soft_9010/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -16,17 +15,17 @@ class MenuPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
+            /*ElevatedButton(
                 onPressed: () {
                   examples2ndRouter.goNamed(Pages.ejLayoutBuilder.name);
                 },
-                child: const Text('Ej. LayoutBuilder')),
-            ElevatedButton(
+                child: const Text('Ej. LayoutBuilder'))*/
+            /*ElevatedButton(
                 onPressed: () {
                   // memoryGameCubit.initGame();
                   examples2ndRouter.goNamed(Pages.tictactoe.name);
                 },
-                child: const Text('TaTeTi')),
+                child: const Text('TaTeTi'))*/
             ElevatedButton(
                 onPressed: () {
                   examples2ndRouter.goNamed(Pages.pedidos.name);

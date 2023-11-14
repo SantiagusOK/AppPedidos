@@ -43,6 +43,14 @@ class Pedido {
 
   Pedido(this.nroPedido);
 
+  double obtenerTotal() {
+    double total = 0;
+    for (var element in items) {
+      total += element.totalItem;
+    }
+    return total;
+  }
+
   agregarItem(int cantidad, Comida comida) {
     items.add(ItemDePedido(cantidad: cantidad, comida: comida));
   }

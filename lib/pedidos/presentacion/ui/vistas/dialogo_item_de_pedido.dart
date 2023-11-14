@@ -41,16 +41,19 @@ class _DialogoItemDePedidoState extends State<DialogoItemDePedido> {
                 onChanged: (unaComida) => {
                       if (unaComida != null)
                         {
-                          setState(() =>
-                              widget.itemDePedidoAEditar.comida = unaComida)
+                          setState(() {
+                            //print(unaComida.precio);
+                            widget.itemDePedidoAEditar.comida = unaComida;
+                          })
                         },
                     }),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                  onPressed: () =>
-                      {Navigator.of(context).pop(widget.itemDePedidoAEditar)},
+                  onPressed: () {
+                    Navigator.of(context).pop(widget.itemDePedidoAEditar);
+                  },
                   child: const SizedBox(
                     height: 50,
                     width: double.infinity,

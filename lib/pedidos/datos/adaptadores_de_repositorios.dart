@@ -7,7 +7,17 @@ class AdaptadorMemoriaRepositorioPedidos implements RepositorioDePedidos {
   final List<Comida> _comidas = [
     Comida(nombre: 'Milanesa', precio: 2500),
     Comida(nombre: 'Hamburguesa', precio: 1800),
-    Comida(nombre: 'Pancho', precio: 500)
+    Comida(nombre: 'Pancho', precio: 500),
+    Comida(nombre: 'Papas Rusticas', precio: 2100),
+    Comida(nombre: 'Lomo', precio: 2500),
+    Comida(nombre: 'Pizza', precio: 2300),
+    Comida(nombre: 'Choripan', precio: 2300),
+    Comida(nombre: 'Ravioles', precio: 2000),
+    Comida(nombre: 'Asado', precio: 4000),
+    Comida(nombre: 'Mila Napolitana', precio: 2300),
+    Comida(nombre: 'Ramen', precio: 2300),
+    Comida(nombre: 'Tacos', precio: 2500),
+    Comida(nombre: 'Ratatouille', precio: 2300)
   ];
 
   @override
